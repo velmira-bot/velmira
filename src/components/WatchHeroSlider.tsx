@@ -171,12 +171,12 @@ export const WatchHeroSlider: React.FC = () => {
                 </div>
 
                 {/* 2. Crystal-Clear 2K+ High-Definition Watch Photography */}
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-2 sm:p-6 lg:p-8">
+                <div className="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-6 lg:p-8">
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className={`max-h-[82vh] max-w-full sm:max-w-5xl h-full w-full object-contain filter drop-shadow-[0_20px_45px_rgba(0,0,0,0.14)] transition-transform duration-[6500ms] ease-out ${
-                      isActive ? 'scale-102' : 'scale-100'
+                    className={`w-full h-full object-cover sm:object-contain object-center max-h-none sm:max-h-[82vh] max-w-full sm:max-w-5xl filter drop-shadow-[0_20px_45px_rgba(0,0,0,0.14)] transition-transform duration-[6500ms] ease-out ${
+                      isActive ? 'scale-105 sm:scale-102' : 'scale-100'
                     }`}
                     style={{
                       imageRendering: '-webkit-optimize-contrast',
@@ -212,11 +212,11 @@ export const WatchHeroSlider: React.FC = () => {
         </div>
 
         {/* Bottom Floating Minimal Bar (Sleek, Translucent & Never Obstructing the Watch) */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pointer-events-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pointer-events-auto">
           {/* Subtle model indicator banner */}
-          <div className="inline-flex items-center space-x-3 bg-white/90 backdrop-blur-md px-4 py-2.5 border border-neutral-200/90 shadow-sm max-w-md">
-            <div className="space-y-0.5">
-              <span className="text-[8px] uppercase tracking-[0.25em] text-neutral-500 font-mono block">
+          <div className="inline-flex items-center space-x-3 bg-white/95 sm:bg-white/90 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 border border-neutral-200/90 shadow-sm max-w-full sm:max-w-md">
+            <div className="space-y-0.5 min-w-0 flex-1">
+              <span className="text-[8px] uppercase tracking-[0.25em] text-neutral-500 font-mono block truncate">
                 {current.movement}
               </span>
               <h3 className="font-serif text-xs sm:text-sm font-bold text-[#111111] tracking-tight truncate">
@@ -268,7 +268,7 @@ export const WatchHeroSlider: React.FC = () => {
       <button
         onClick={prevSlide}
         aria-label="Previous Timepiece"
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 bg-white/85 hover:bg-white text-neutral-800 hover:text-black border border-neutral-200 shadow-md backdrop-blur-xs transition rounded-full opacity-60 hover:opacity-100 hover:scale-105"
+        className="absolute left-2.5 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 bg-white/85 hover:bg-white text-neutral-800 hover:text-black border border-neutral-200 shadow-md backdrop-blur-xs transition rounded-full opacity-60 hover:opacity-100 hover:scale-105"
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
@@ -276,7 +276,7 @@ export const WatchHeroSlider: React.FC = () => {
       <button
         onClick={nextSlide}
         aria-label="Next Timepiece"
-        className="absolute right-9 sm:right-12 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 bg-white/85 hover:bg-white text-neutral-800 hover:text-black border border-neutral-200 shadow-md backdrop-blur-xs transition rounded-full opacity-60 hover:opacity-100 hover:scale-105"
+        className="absolute right-2.5 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 bg-white/85 hover:bg-white text-neutral-800 hover:text-black border border-neutral-200 shadow-md backdrop-blur-xs transition rounded-full opacity-60 hover:opacity-100 hover:scale-105"
       >
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
