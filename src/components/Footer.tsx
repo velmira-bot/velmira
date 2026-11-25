@@ -130,18 +130,18 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Manufacture Standards */}
+          {/* Client Concierge */}
           <div>
             <h4 className="font-serif text-xs font-bold text-[#111111] uppercase tracking-widest mb-4">
-              Manufacture
+              Client Concierge
             </h4>
             <ul className="space-y-2.5 text-xs text-[#71717A]">
-              <li>Swiss Automatic Calibres</li>
-              <li>28,800 VPH High-Frequency</li>
-              <li>Anti-Reflective Sapphire</li>
-              <li>316L Surgical Steel</li>
-              <li>Grade 5 Aerospace Titanium</li>
-              <li>Sunburst Emerald & Violet Dials</li>
+              <li>Direct WhatsApp Assistance</li>
+              <li>Insured Doorstep Cargo (India & UAE)</li>
+              <li>Serial Authenticity Verification</li>
+              <li>Complimentary Bracelet Sizing</li>
+              <li>White-Glove Courier Dispatch</li>
+              <li>Patron Consultation</li>
             </ul>
           </div>
 

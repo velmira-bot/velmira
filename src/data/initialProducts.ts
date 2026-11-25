@@ -19,7 +19,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     images: [
       '/watches/seiko-collection-vault.jpg',
       '/watches/emerald-purple-automatic.jpg',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=85'
+      '/watches/seiko-collection-vault.jpg'
     ],
     sizes: ['38mm', '40mm', '42mm'],
     colors: [
@@ -73,7 +73,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     images: [
       '/watches/emerald-purple-automatic.jpg',
       '/watches/seiko-collection-vault.jpg',
-      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85'
+      '/watches/emerald-purple-automatic.jpg'
     ],
     sizes: ['39mm', '41mm'],
     colors: [
@@ -124,7 +124,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 420,
     images: [
       '/watches/cartier-boutique-display.jpg',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=85',
+      '/watches/cartier-boutique-display.jpg',
       '/watches/tissot-silver-chronograph.jpg'
     ],
     sizes: ['Medium 35mm', 'Large 39.8mm'],
@@ -177,7 +177,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 165,
     images: [
       '/watches/hublot-chrono-lounge.jpg',
-      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85',
+      '/watches/hublot-chrono-lounge.jpg',
       '/watches/tissot-silver-chronograph.jpg'
     ],
     sizes: ['42mm', '44mm'],
@@ -229,7 +229,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 290,
     images: [
       '/watches/tissot-silver-chronograph.jpg',
-      'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85',
+      '/watches/tissot-silver-chronograph.jpg',
       '/watches/cartier-boutique-display.jpg'
     ],
     sizes: ['40mm', '42mm'],
@@ -281,7 +281,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 540,
     images: [
       '/watches/vintage-silver-digital.jpg',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85',
+      '/watches/vintage-silver-digital.jpg',
       '/watches/seiko-collection-vault.jpg'
     ],
     sizes: ['36mm Unisex', '38.5mm Standard'],
@@ -383,7 +383,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     ratingCount: 420,
     reviewCount: 110,
     images: [
-      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85',
+      '/watches/horology-atelier-vintage.jpg',
       '/watches/hublot-chrono-lounge.jpg',
       '/watches/cartier-boutique-display.jpg'
     ],
@@ -434,9 +434,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     ratingCount: 1530,
     reviewCount: 380,
     images: [
-      'https://images.unsplash.com/photo-1547996160-01ff600745aa?auto=format&fit=crop&w=1200&q=85',
+      '/watches/seiko-collection-vault.jpg',
       '/watches/hublot-chrono-lounge.jpg',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=85'
+      '/watches/emerald-purple-automatic.jpg'
     ],
     sizes: ['41mm Case'],
     colors: [
@@ -486,9 +486,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     ratingCount: 940,
     reviewCount: 210,
     images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85',
+      '/watches/cartier-boutique-display.jpg',
       '/watches/vintage-silver-digital.jpg',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=85'
+      '/watches/hublot-chrono-lounge.jpg'
     ],
     sizes: ['38mm Ultra-Thin'],
     colors: [
@@ -537,9 +537,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     ratingCount: 1380,
     reviewCount: 340,
     images: [
-      'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1200&q=85',
+      '/watches/tissot-silver-chronograph.jpg',
       '/watches/cartier-boutique-display.jpg',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85'
+      '/watches/vintage-silver-digital.jpg'
     ],
     sizes: ['32mm Petite'],
     colors: [
@@ -589,7 +589,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     ratingCount: 890,
     reviewCount: 225,
     images: [
-      'https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=1200&q=85',
+      '/watches/horology-atelier-vintage.jpg',
       '/watches/tissot-silver-chronograph.jpg',
       '/watches/emerald-purple-automatic.jpg'
     ],

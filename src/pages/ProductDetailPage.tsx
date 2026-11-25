@@ -41,16 +41,6 @@ export const ProductDetailPage: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [activeTab, setActiveTab] = useState<'details' | 'specs' | 'reviews'>('details');
-
-  // Review form
-  const [reviewRating, setReviewRating] = useState(5);
-  const [reviewName, setReviewName] = useState('');
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [reviewComment, setReviewComment] = useState('');
-  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
-  const [reviewSuccess, setReviewSuccess] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -59,8 +49,6 @@ export const ProductDetailPage: React.FC = () => {
       setSelectedSize(product.sizes[0] || '40mm');
       setSelectedColor(product.colors[0]?.name || 'Standard');
       setQuantity(1);
-
-      getReviewsForProduct(product.id).then(res => setReviews(res));
     }
   }, [id, product]);
 
@@ -95,30 +83,6 @@ export const ProductDetailPage: React.FC = () => {
 
   const handleWhatsAppOrder = () => {
     openDirectProductWhatsApp(product, selectedSize, selectedColor, currency);
-  };
-
-  const handleReviewSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!reviewName || !reviewTitle || !reviewComment) return;
-    setIsSubmittingReview(true);
-    try {
-      const newRev = await submitReview({
-        productId: product.id,
-        userName: reviewName,
-        userLocation: country === 'UAE' ? 'Dubai, UAE' : 'Verified Buyer, India',
-        rating: reviewRating,
-        title: reviewTitle,
-        comment: reviewComment,
-        verifiedPurchase: true
-      });
-      setReviews(prev => [newRev, ...prev]);
-      setReviewSuccess(true);
-      setReviewName('');
-      setReviewTitle('');
-      setReviewComment('');
-    } finally {
-      setIsSubmittingReview(false);
-    }
   };
 
   return (
@@ -207,13 +171,9 @@ export const ProductDetailPage: React.FC = () => {
                   {product.name}
                 </h1>
 
-                <div className="flex items-center space-x-3 mt-3">
-                  <div className="flex items-center space-x-1.5 bg-[#111111] text-white text-xs font-bold px-2 py-0.5">
-                    <span>{product.rating}</span>
-                    <Star className="w-3 h-3 fill-white text-white" />
-                  </div>
-                  <span className="text-xs text-[#71717A] font-medium">
-                    {product.ratingCount.toLocaleString('en-IN')} Patron Ratings & {product.reviewCount} Reviews
+                <div className="flex items-center space-x-2 mt-2.5">
+                  <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-800 bg-neutral-100 border border-neutral-300 px-2.5 py-0.5 font-bold">
+                    Authenticated Swiss Calibre
                   </span>
                 </div>
 
@@ -419,75 +379,27 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* LOWER TABS */}
+          {/* WATCH SPECIFICATIONS & DETAILS */}
           <div className="mt-14 pt-8 border-t border-neutral-200">
-            <div className="flex border-b border-neutral-200 space-x-4 sm:space-x-8 overflow-x-auto scrollbar-none whitespace-nowrap">
-              <button
-                onClick={() => setActiveTab('details')}
-                className={`pb-3 text-xs font-bold uppercase tracking-widest transition ${
-                  activeTab === 'details'
-                    ? 'border-b-2 border-black text-[#111111]'
-                    : 'text-[#71717A] hover:text-[#111111]'
-                }`}
-              >
-                Materials & Craftsmanship
-              </button>
-              <button
-                onClick={() => setActiveTab('specs')}
-                className={`pb-3 text-xs font-bold uppercase tracking-widest transition ${
-                  activeTab === 'specs'
-                    ? 'border-b-2 border-black text-[#111111]'
-                    : 'text-[#71717A] hover:text-[#111111]'
-                }`}
-              >
-                Atelier Specifications
-              </button>
-              <button
-                onClick={() => setActiveTab('reviews')}
-                className={`pb-3 text-xs font-bold uppercase tracking-widest transition ${
-                  activeTab === 'reviews'
-                    ? 'border-b-2 border-black text-[#111111]'
-                    : 'text-[#71717A] hover:text-[#111111]'
-                }`}
-              >
-                Patron Reviews ({reviews.length})
-              </button>
+            <div className="mb-6 pb-2 border-b border-neutral-200">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">
+                AUTHENTIC TIMEPIECE
+              </span>
+              <h3 className="font-serif text-lg font-bold text-[#111111] tracking-wide mt-0.5">
+                Watch Specifications & Overview
+              </h3>
             </div>
 
-            {activeTab === 'details' && (
-              <div className="py-6 space-y-4 max-w-3xl text-xs sm:text-sm text-[#52525B] leading-relaxed">
-                <p>{product.description}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-neutral-200 text-xs">
-                  <div>
-                    <span className="font-bold text-[#111111] block mb-0.5">Primary Materials:</span>
-                    <span className="text-[#71717A]">{product.fabric}</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-[#111111] block mb-0.5">Dimensions & Fit:</span>
-                    <span className="text-[#71717A]">{product.fit}</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-[#111111] block mb-0.5">Pattern & Finish:</span>
-                    <span className="text-[#71717A]">{product.pattern}</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-[#111111] block mb-0.5">Care Instructions:</span>
-                    <span className="text-[#71717A]">{product.care}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'specs' && (
-              <div className="py-6 max-w-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-7">
                 <table className="w-full text-xs text-left border border-neutral-200 overflow-hidden">
                   <tbody className="divide-y divide-neutral-200">
                     <tr className="bg-[#F8F9FA]">
-                      <td className="p-3 font-semibold text-[#111111] w-1/3">Department</td>
+                      <td className="p-3 font-semibold text-[#111111] w-1/3">Category</td>
                       <td className="p-3 text-[#71717A]">{product.category}</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-semibold text-[#111111]">Atelier Line</td>
+                      <td className="p-3 font-semibold text-[#111111]">Brand / Line</td>
                       <td className="p-3 text-[#111111] font-mono font-bold">{product.brand}</td>
                     </tr>
                     {Object.entries(product.specifications || {}).map(([key, val], idx) => (
@@ -499,139 +411,18 @@ export const ProductDetailPage: React.FC = () => {
                   </tbody>
                 </table>
               </div>
-            )}
 
-            {activeTab === 'reviews' && (
-              <div className="py-6 space-y-8 max-w-4xl">
-                <div className="p-6 bg-[#F8F9FA] border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6">
-                  <div className="flex items-center space-x-3">
-                    <span className="font-serif text-4xl font-extrabold text-[#111111]">
-                      {product.rating}
-                    </span>
-                    <div>
-                      <div className="flex text-amber-500">
-                        {[1, 2, 3, 4, 5].map(i => (
-                          <Star key={i} className="w-4 h-4 fill-amber-400" />
-                        ))}
-                      </div>
-                      <p className="text-[11px] text-[#71717A] mt-0.5">Verified India & UAE Patron Feedback</p>
-                    </div>
-                  </div>
-                  <div className="text-xs text-[#71717A] text-center sm:text-right">
-                    <p className="font-semibold text-[#111111]">100% of owners recommend this luxury piece</p>
-                    <p className="text-[11px] text-neutral-400 mt-0.5">Authenticated delivery signatures</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {reviews.map(rev => (
-                    <div key={rev.id} className="p-4 border border-neutral-200 bg-white">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <span className="bg-[#111111] text-white text-[10px] font-bold px-1.5 py-0.5 flex items-center space-x-0.5">
-                            <span>{rev.rating}</span>
-                            <Star className="w-2.5 h-2.5 fill-white" />
-                          </span>
-                          <span className="text-xs font-bold text-[#111111]">{rev.title}</span>
-                        </div>
-                        <span className="text-[10px] text-neutral-400">
-                          {new Date(rev.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </span>
-                      </div>
-                      <p className="text-xs text-[#52525B] mt-2 leading-relaxed">{rev.comment}</p>
-                      <div className="flex items-center space-x-2 mt-3 text-[11px] text-neutral-500">
-                        <span className="font-medium text-[#111111]">{rev.userName} ({rev.userLocation})</span>
-                        <span>•</span>
-                        <span className="text-emerald-700 flex items-center">
-                          <Check className="w-3 h-3 mr-0.5" /> Verified Purchase
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Submit review */}
-                <div className="pt-6 border-t border-neutral-200">
-                  <h4 className="font-serif text-base font-bold text-[#111111] mb-3">
-                    Write a Patron Review
-                  </h4>
-                  {reviewSuccess ? (
-                    <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs">
-                      Thank you for reviewing! Your feedback has been published.
-                    </div>
-                  ) : (
-                    <form onSubmit={handleReviewSubmit} className="space-y-3">
-                      <div>
-                        <label className="block text-xs font-semibold text-[#111111] mb-1">Rating</label>
-                        <div className="flex space-x-1">
-                          {[1, 2, 3, 4, 5].map(st => (
-                            <button
-                              key={st}
-                              type="button"
-                              onClick={() => setReviewRating(st)}
-                              className="p-1 focus:outline-none"
-                            >
-                              <Star
-                                className={`w-5 h-5 ${
-                                  st <= reviewRating
-                                    ? 'fill-amber-400 text-amber-400'
-                                    : 'text-neutral-300'
-                                }`}
-                              />
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-semibold text-[#111111] mb-1">Your Name</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Sultan Al Qasimi"
-                            value={reviewName}
-                            onChange={e => setReviewName(e.target.value)}
-                            className="w-full px-3 py-2 text-xs border border-neutral-300 bg-white text-[#111111] focus:outline-none focus:border-black"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-semibold text-[#111111] mb-1">Review Headline</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Flawless dial & rapid WhatsApp delivery"
-                            value={reviewTitle}
-                            onChange={e => setReviewTitle(e.target.value)}
-                            className="w-full px-3 py-2 text-xs border border-neutral-300 bg-white text-[#111111] focus:outline-none focus:border-black"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-[#111111] mb-1">Detailed Review</label>
-                        <textarea
-                          required
-                          rows={3}
-                          placeholder="Describe the build quality, finishing, movement accuracy or leather feel..."
-                          value={reviewComment}
-                          onChange={e => setReviewComment(e.target.value)}
-                          className="w-full px-3 py-2 text-xs border border-neutral-300 bg-white text-[#111111] focus:outline-none focus:border-black"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={isSubmittingReview}
-                        className="px-6 py-2.5 bg-[#111111] text-white font-semibold text-xs uppercase tracking-wider hover:bg-black transition"
-                      >
-                        {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
-                      </button>
-                    </form>
-                  )}
+              <div className="lg:col-span-5 bg-[#FAFAFA] border border-neutral-200 p-5 space-y-3 text-xs text-[#52525B]">
+                <h4 className="font-serif font-bold text-[#111111] uppercase tracking-wider text-[11px]">
+                  Description
+                </h4>
+                <p className="leading-relaxed">{product.description}</p>
+                <div className="pt-3 border-t border-neutral-200 flex items-center space-x-2 text-emerald-800 font-semibold text-[11px]">
+                  <ShieldCheck className="w-4 h-4 text-emerald-700" />
+                  <span>Insured Handover with Authenticity Certificate</span>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
 

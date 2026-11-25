@@ -201,7 +201,7 @@ export const AdminDashboardPage: React.FC = () => {
       stock: Number(formStock),
       sizes: parsedSizes.length > 0 ? parsedSizes : ['40mm'],
       colors: parsedColors.length > 0 ? parsedColors : [{ name: 'Silver', hex: '#C0C0C0' }],
-      images: [formImageUrl || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85'],
+      images: [formImageUrl || '/watches/seiko-collection-vault.jpg'],
       description: formDescription,
       fabric: `${formCaseMaterial} / ${formStrapMaterial}`,
       fit: 'Precision Butterfly Deployant Clasp',

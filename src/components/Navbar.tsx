@@ -74,8 +74,7 @@ export const Navbar: React.FC = () => {
     { label: 'All Watches', path: '/watches' },
     { label: "Men's Watches", path: "/watches?category=Men's%20Watches" },
     { label: "Women's Watches", path: "/watches?category=Women's%20Watches" },
-    { label: 'Luxury Watches', path: '/watches?category=Luxury%20Watches' },
-    { label: 'Collections', path: '/watches' }
+    { label: 'Luxury Watches', path: '/watches?category=Luxury%20Watches' }
   ];
 
   const trendingSearches = [

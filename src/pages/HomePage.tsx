@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MessageSquare, ChevronRight, ShieldCheck, Clock, Award, Sparkles, Star, CheckCircle2, Shield } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShieldCheck, Clock, Award, Sparkles, Shield } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { ProductCard } from '../components/ProductCard';
 import { WatchHeroSlider } from '../components/WatchHeroSlider';
-import { OFFICIAL_WHATSAPP_NUMBER, WHATSAPP_RAW_NUMBER } from '../utils/whatsapp';
 
 export const HomePage: React.FC = () => {
   const { products } = useShop();
@@ -257,72 +256,7 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          6. ATELIER HOROLOGY SPOTLIGHT (Editorial Centerpiece)
-      ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-white border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Visual Frame */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden border border-neutral-200 shadow-md bg-neutral-100 group">
-                <img
-                  src="/watches/horology-atelier-vintage.jpg"
-                  alt="Velmira Horology Atelier Craftsmanship"
-                  className="w-full h-full object-cover object-center filter contrast-[1.02] transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md border border-neutral-200 p-4">
-                  <span className="text-[9px] uppercase tracking-widest font-mono text-[#71717A] block">
-                    ATELIER WORKSHOP RESTORATION
-                  </span>
-                  <p className="font-serif text-sm font-bold text-[#111111] mt-0.5">
-                    Hand-Calibrated Escapements & Certified Chronometry
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Editorial Content */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#71717A]">
-                <span className="w-6 h-[1.5px] bg-[#111111]" />
-                <span>MANUFACTURE DISCIPLINE</span>
-              </div>
-
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#111111] leading-tight tracking-tight">
-                Engineering Beauty at 28,800 Beats Per Hour.
-              </h2>
-
-              <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">
-                At Velmira, every mechanical calibre is regulated to stringent chronometric tolerances. We utilize solid surgical grade 316L stainless steel, anti-reflective sapphire glass with 9 Mohs scale hardness, and hand-finished dials in jewel-toned emerald, violet, and pure silver sunburst.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 pt-2 border-t border-neutral-200 text-xs">
-                <div>
-                  <span className="font-mono font-bold text-[#111111] text-base block">10 ATM</span>
-                  <span className="text-[#71717A] text-[11px]">100M Water Resistance Rating</span>
-                </div>
-                <div>
-                  <span className="font-mono font-bold text-[#111111] text-base block">42 HOURS</span>
-                  <span className="text-[#71717A] text-[11px]">Continuous Rotor Power Reserve</span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link
-                  to="/watches"
-                  className="inline-flex items-center space-x-2 px-7 py-3.5 bg-[#111111] text-white hover:bg-black font-serif text-xs font-bold tracking-[0.2em] uppercase transition shadow-sm"
-                >
-                  <span>Explore The Watch Vault</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          7. BEST SELLERS (Off-White #F8F9FA)
+          6. BEST SELLERS (Off-White #F8F9FA)
       ========================================================================= */}
       <section className="py-16 sm:py-20 bg-[#F8F9FA] border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -352,119 +286,6 @@ export const HomePage: React.FC = () => {
               <ProductCard key={watch.id} product={watch} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          8. COLLECTOR VOICES / PATRON TESTIMONIALS
-      ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-white border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#71717A] block">
-              PATRON VERIFICATIONS
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#111111] tracking-tight mt-1">
-              Collector Experiences Across India & UAE
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 bg-[#FAFAFA] border border-neutral-200 shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="flex text-amber-500 mb-3">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-[#52525B] leading-relaxed italic">
-                  "The teal cyan dial of the Calibre 5 Suite catches the afternoon sun with unbelievable depth. Delivered in Dubai within 24 hours with certified paperwork."
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs">
-                <div>
-                  <span className="font-bold text-[#111111] block">Rashid Al Maktoum</span>
-                  <span className="text-[10px] text-neutral-500">Downtown, Dubai</span>
-                </div>
-                <span className="text-[10px] text-emerald-700 font-semibold flex items-center">
-                  <CheckCircle2 className="w-3 h-3 mr-1" /> Verified
-                </span>
-              </div>
-            </div>
-
-            <div className="p-6 bg-[#FAFAFA] border border-neutral-200 shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="flex text-amber-500 mb-3">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-[#52525B] leading-relaxed italic">
-                  "The Tissot tachymètre on cognac alligator leather has become my daily executive watch. The case polishing and weight are exceptional."
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs">
-                <div>
-                  <span className="font-bold text-[#111111] block">Vikramaditya S.</span>
-                  <span className="text-[10px] text-neutral-500">Bandra West, Mumbai</span>
-                </div>
-                <span className="text-[10px] text-emerald-700 font-semibold flex items-center">
-                  <CheckCircle2 className="w-3 h-3 mr-1" /> Verified
-                </span>
-              </div>
-            </div>
-
-            <div className="p-6 bg-[#FAFAFA] border border-neutral-200 shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="flex text-amber-500 mb-3">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-[#52525B] leading-relaxed italic">
-                  "Ordered via direct WhatsApp Concierge. Fast, direct responses and seamless white-glove cargo handling to Abu Dhabi."
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs">
-                <div>
-                  <span className="font-bold text-[#111111] block">Tariq Al Qasimi</span>
-                  <span className="text-[10px] text-neutral-500">Al Reem, Abu Dhabi</span>
-                </div>
-                <span className="text-[10px] text-emerald-700 font-semibold flex items-center">
-                  <CheckCircle2 className="w-3 h-3 mr-1" /> Verified
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          9. CONCIERGE DIRECT WHATSAPP ACTION
-      ========================================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#71717A]">
-            HAUTE HORLOGERIE CONCIERGE
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#111111] tracking-tight mt-2 mb-4">
-            Private Timepiece Curation & Sourcing
-          </h2>
-          <div className="w-12 h-[2px] bg-[#111111] mx-auto mb-6" />
-
-          <p className="text-xs sm:text-sm text-[#71717A] max-w-xl mx-auto leading-relaxed mb-8">
-            Looking for a specific mechanical calibre, customized dial allocation, or private collector consultation? Connect directly with our master atelier concierge.
-          </p>
-
-          <a
-            href={`https://wa.me/${WHATSAPP_RAW_NUMBER}?text=${encodeURIComponent('Hello Velmira Concierge, I would like to inquire about private timepiece allocations.')}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center space-x-2 px-8 py-3.5 bg-[#111111] text-white hover:bg-black font-serif text-xs font-bold tracking-[0.2em] uppercase transition shadow-md hover:shadow-lg"
-          >
-            <MessageSquare className="w-4 h-4 text-emerald-400" />
-            <span>WhatsApp Concierge ({OFFICIAL_WHATSAPP_NUMBER})</span>
-          </a>
         </div>
       </section>
     </div>
