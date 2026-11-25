@@ -4,7 +4,7 @@ import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Check, Sparkles, 
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useAuth } from '../context/AuthContext';
-import { openWhatsAppOrder, OFFICIAL_WHATSAPP_NUMBER } from '../utils/whatsapp';
+import { openWhatsAppOrder, getWhatsAppContact } from '../utils/whatsapp';
 
 export const CartDrawer: React.FC = () => {
   const {
@@ -119,7 +119,7 @@ export const CartDrawer: React.FC = () => {
           <div className="bg-[#F8F8F8] text-[#111111] border-b border-neutral-200 p-2.5 px-4 text-xs flex items-center justify-between">
             <div className="flex items-center space-x-1.5 truncate">
               <MessageCircle className="w-3.5 h-3.5 text-[#111111] shrink-0" />
-              <span className="truncate">Concierge: <strong>{OFFICIAL_WHATSAPP_NUMBER}</strong></span>
+              <span className="truncate">Concierge: <strong>{getWhatsAppContact(country).display}</strong></span>
             </div>
             <span className="font-mono text-[10px] border border-neutral-300 px-1.5 py-0.5 shrink-0">
               {country === 'UAE' ? '🇦🇪 UAE' : '🇮🇳 INDIA'}
@@ -262,7 +262,7 @@ export const CartDrawer: React.FC = () => {
                   className="w-full py-3 bg-[#111111] text-white hover:bg-neutral-800 font-medium text-xs uppercase tracking-wider transition flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp Concierge (+971 55 678 7854)</span>
+                  <span>WhatsApp Concierge ({getWhatsAppContact(country).display})</span>
                 </button>
 
                 <div className="grid grid-cols-2 gap-2">

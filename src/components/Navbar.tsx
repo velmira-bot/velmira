@@ -17,7 +17,7 @@ import { useShop } from '../context/ShopContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { OFFICIAL_WHATSAPP_NUMBER, WHATSAPP_RAW_NUMBER } from '../utils/whatsapp';
+import { getWhatsAppContact } from '../utils/whatsapp';
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export const Navbar: React.FC = () => {
   const { totalItemsCount, setIsCartDrawerOpen } = useCart();
   const { wishlistIds } = useWishlist();
   const { country, setRegion, setIsRegionModalOpen } = useCurrency();
+  const whatsappContact = getWhatsAppContact(country);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -98,7 +99,7 @@ export const Navbar: React.FC = () => {
             </span>
             <span className="text-neutral-300">|</span>
             <span className="truncate text-[#64748B] text-[10px] sm:text-[11px]">
-              Complimentary Insured Delivery (India & UAE) • Concierge: <a href={`https://wa.me/${WHATSAPP_RAW_NUMBER}`} target="_blank" rel="noreferrer" className="text-[#111111] font-semibold hover:underline">{OFFICIAL_WHATSAPP_NUMBER}</a>
+              Complimentary Insured Delivery (India & UAE) • Concierge: <a href={`https://wa.me/${whatsappContact.raw}`} target="_blank" rel="noreferrer" className="text-[#111111] font-semibold hover:underline">{whatsappContact.display}</a>
             </span>
           </div>
 
@@ -328,13 +329,13 @@ export const Navbar: React.FC = () => {
             ))}
             <div className="pt-2">
               <a
-                href={`https://wa.me/${WHATSAPP_RAW_NUMBER}?text=${encodeURIComponent('Hello Velmira Concierge, I would like to inquire about your watch collections.')}`}
+                href={`https://wa.me/${whatsappContact.raw}?text=${encodeURIComponent('Hello Velmira Concierge, I would like to inquire about your watch collections.')}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center space-x-2 text-xs font-semibold text-[#111111] py-2"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-600" />
-                <span>WhatsApp Concierge ({OFFICIAL_WHATSAPP_NUMBER})</span>
+                <span>WhatsApp Concierge ({whatsappContact.display})</span>
               </a>
             </div>
           </div>

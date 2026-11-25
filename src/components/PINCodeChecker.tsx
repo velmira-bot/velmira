@@ -130,7 +130,7 @@ export const PINCodeChecker: React.FC = () => {
                 • <strong className="text-emerald-700">Cash on Delivery & WhatsApp Dispatch Available</strong>
               </p>
               <p className="text-[11px] text-stone-600 pl-5">
-                • Inquiries & Customization via WhatsApp (+971 55 678 7854)
+                • Inquiries & Customization via WhatsApp ({selectedCountry === 'UAE' ? '+971 556787854' : '+91 8893777727'})
               </p>
             </div>
           ) : (

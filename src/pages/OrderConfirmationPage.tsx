@@ -4,6 +4,7 @@ import { CheckCircle2, Truck, Printer, ArrowRight, MapPin, MessageCircle } from 
 import { useShop } from '../context/ShopContext';
 import { InvoiceModal } from '../components/InvoiceModal';
 import { TrackOrderModal } from '../components/TrackOrderModal';
+import { getWhatsAppContact } from '../utils/whatsapp';
 
 export const OrderConfirmationPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,13 +55,13 @@ export const OrderConfirmationPage: React.FC = () => {
           {/* Action Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
             <a
-              href={`https://wa.me/971556787854?text=${encodeURIComponent(`Hello Velmira Concierge, I am inquiring about my Watch Order ID: ${order?.id || id}`)}`}
+              href={`https://wa.me/${getWhatsAppContact(order?.shippingAddress?.country || order?.currency).raw}?text=${encodeURIComponent(`Hello Velmira Concierge, I am inquiring about my Watch Order ID: ${order?.id || id}`)}`}
               target="_blank"
               rel="noreferrer"
               className="w-full sm:w-auto px-6 py-3 bg-[#111111] hover:bg-neutral-800 text-white font-medium text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp Concierge (+971 55 678 7854)</span>
+              <span>WhatsApp Concierge ({getWhatsAppContact(order?.shippingAddress?.country || order?.currency).display})</span>
             </a>
 
             <button

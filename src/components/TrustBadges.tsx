@@ -1,6 +1,5 @@
 import React from 'react';
 import { ShieldCheck, RotateCcw, Truck, MessageSquare } from 'lucide-react';
-import { OFFICIAL_WHATSAPP_NUMBER } from '../utils/whatsapp';
 
 export const TrustBadges: React.FC = () => {
   const perks = [
@@ -17,7 +16,7 @@ export const TrustBadges: React.FC = () => {
     {
       icon: MessageSquare,
       title: 'WhatsApp Concierge',
-      subtitle: `Direct: ${OFFICIAL_WHATSAPP_NUMBER}`
+      subtitle: 'Direct: IND & UAE Dedicated Support'
     },
     {
       icon: RotateCcw,

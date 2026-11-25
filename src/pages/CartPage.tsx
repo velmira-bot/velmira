@@ -15,7 +15,7 @@ import {
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useAuth } from '../context/AuthContext';
-import { openWhatsAppOrder, OFFICIAL_WHATSAPP_NUMBER } from '../utils/whatsapp';
+import { openWhatsAppOrder, getWhatsAppContact } from '../utils/whatsapp';
 
 export const CartPage: React.FC = () => {
   const {
@@ -131,7 +131,7 @@ export const CartPage: React.FC = () => {
           </h1>
           <div className="flex items-center space-x-2 text-xs text-[#111111] bg-[#F8F8F8] border border-neutral-200 px-3 py-1.5 font-medium">
             <MessageCircle className="w-4 h-4 text-[#111111]" />
-            <span>Concierge: <strong>{OFFICIAL_WHATSAPP_NUMBER}</strong></span>
+            <span>Concierge: <strong>{getWhatsAppContact(country).display}</strong></span>
           </div>
         </div>
 
@@ -325,7 +325,7 @@ export const CartPage: React.FC = () => {
                   className="w-full py-3.5 px-6 bg-[#111111] hover:bg-neutral-800 text-white font-medium text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Order on WhatsApp (+971 55 678 7854)</span>
+                  <span>Order on WhatsApp ({getWhatsAppContact(country).display})</span>
                 </button>
 
                 <button

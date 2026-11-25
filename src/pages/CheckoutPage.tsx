@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { OFFICIAL_WHATSAPP_NUMBER, WHATSAPP_RAW_NUMBER } from '../utils/whatsapp';
+import { getWhatsAppContact } from '../utils/whatsapp';
 
 const INDIAN_STATES = [
   'Maharashtra',
@@ -189,8 +189,9 @@ export const CheckoutPage: React.FC = () => {
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     lines.push('Please confirm availability and dispatch schedule. Thank you.');
 
+    const targetContact = getWhatsAppContact(country, phone);
     const encodedMsg = encodeURIComponent(lines.join('\n'));
-    const whatsappUrl = `https://wa.me/${WHATSAPP_RAW_NUMBER}?text=${encodedMsg}`;
+    const whatsappUrl = `https://wa.me/${targetContact.raw}?text=${encodedMsg}`;
 
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');
@@ -199,6 +200,8 @@ export const CheckoutPage: React.FC = () => {
     clearCart();
     setIsSubmitted(true);
   };
+
+  const targetContact = getWhatsAppContact(country, phone);
 
   // Classy Confirmation Screen
   if (isSubmitted) {
@@ -221,22 +224,22 @@ export const CheckoutPage: React.FC = () => {
 
           <div className="my-5 p-4 bg-[#F8F8F8] border border-neutral-200 text-left text-xs space-y-2 text-[#777777]">
             <p className="text-[#111111] font-medium">
-              Your inquiry has been routed to our concierge desk in {country === 'UAE' ? 'Dubai, UAE' : 'India'}.
+              Your inquiry has been routed to our client concierge desk.
             </p>
             <p className="text-[11px] text-[#777777]">
-              Our concierge at <strong>{OFFICIAL_WHATSAPP_NUMBER}</strong> is reviewing your order details and will confirm dispatch tracking on WhatsApp shortly.
+              Our concierge at <strong>{targetContact.display}</strong> is reviewing your order details and will confirm dispatch tracking on WhatsApp shortly.
             </p>
           </div>
 
           <div className="space-y-2.5">
             <a
-              href={`https://wa.me/${WHATSAPP_RAW_NUMBER}?text=${encodeURIComponent(`Hello Velmira Concierge, I am following up on my Order Enquiry Reference ${orderRef}.`)}`}
+              href={`https://wa.me/${targetContact.raw}?text=${encodeURIComponent(`Hello Velmira Concierge, I am following up on my Order Enquiry Reference ${orderRef}.`)}`}
               target="_blank"
               rel="noreferrer"
               className="w-full py-3.5 px-6 bg-[#111111] hover:bg-neutral-800 text-white font-medium text-xs uppercase tracking-wider transition flex items-center justify-center space-x-2"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Continue on WhatsApp ({OFFICIAL_WHATSAPP_NUMBER})</span>
+              <span>Continue on WhatsApp ({targetContact.display})</span>
             </a>
 
             <Link
@@ -582,7 +585,7 @@ export const CheckoutPage: React.FC = () => {
                   <span>Send Order Enquiry on WhatsApp • {formatPrice(finalTotal)}</span>
                 </button>
                 <p className="text-[11px] text-center text-[#777777] mt-2">
-                  Orders are confirmed directly with our boutique concierge at <strong className="text-[#111111]">{OFFICIAL_WHATSAPP_NUMBER}</strong>.
+                  Orders are confirmed directly with our boutique concierge at <strong className="text-[#111111]">{targetContact.display}</strong>.
                 </p>
               </div>
             </form>

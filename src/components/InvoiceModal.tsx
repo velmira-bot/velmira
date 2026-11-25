@@ -54,16 +54,16 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, isOpen, onClo
           {/* Header */}
           <div className="flex justify-between items-start pb-6 border-b border-stone-200">
             <div>
-              <h1 className="font-cinzel text-2xl font-black tracking-widest text-[#0F0F0F]">
-                VELMIRA FASHION
+              <h1 className="font-serif text-2xl font-black tracking-widest text-[#0F0F0F]">
+                VELMIRA
               </h1>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
-                Haute Couture & Living Privé
+              <p className="text-[10px] uppercase tracking-[0.25em] text-[#111111] font-semibold">
+                Haute Horlogerie Ateliers
               </p>
               <p className="text-xs text-stone-500 mt-2 max-w-xs leading-relaxed">
-                Atelier Velmira Ltd, Nariman Point, Mumbai 400021, India<br />
                 GSTIN: 27AABCV8942K1Z9 | CIN: U18209MH2026PLC098234<br />
-                Email: concierge@velmira.com | Phone: +91 (022) 8000-VELMIRA
+                Email: velmirafashion00@gmail.com<br />
+                UAE: +971 556787854 | IND: +91 8893777727
               </p>
             </div>
             <div className="text-right">

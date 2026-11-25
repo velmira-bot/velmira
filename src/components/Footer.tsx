@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, ArrowRight, MessageCircle } from 'lucide-react';
-import { OFFICIAL_WHATSAPP_NUMBER, WHATSAPP_RAW_NUMBER } from '../utils/whatsapp';
+import { Mail, MessageCircle } from 'lucide-react';
+import { 
+  WHATSAPP_UAE_DISPLAY, 
+  WHATSAPP_UAE_RAW, 
+  WHATSAPP_IND_DISPLAY, 
+  WHATSAPP_IND_RAW, 
+  VELMIRA_EMAIL 
+} from '../utils/whatsapp';
 
 export const Footer: React.FC = () => {
   return (
@@ -22,18 +28,24 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-[#71717A] leading-relaxed max-w-sm">
               Velmira is an independent luxury watch atelier dedicated strictly to mechanical precision, high-beat automatic movements, and timeless craftsmanship. Direct white-glove delivery across India and the United Arab Emirates.
             </p>
-            <div className="space-y-2 text-xs text-[#52525B] pt-2">
+            <div className="space-y-2.5 text-xs text-[#52525B] pt-2">
               <div className="flex items-center space-x-2">
                 <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>WhatsApp Concierge: <strong className="text-[#111111] font-mono">{OFFICIAL_WHATSAPP_NUMBER}</strong></span>
+                <span>
+                  UAE Concierge: <a href={`https://wa.me/${WHATSAPP_UAE_RAW}`} target="_blank" rel="noreferrer" className="text-[#111111] font-mono font-bold hover:underline">{WHATSAPP_UAE_DISPLAY}</a>
+                </span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-[#111111] shrink-0" />
-                <span>Regional Ateliers: Dubai, UAE & Mumbai, India</span>
+                <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>
+                  IND Concierge: <a href={`https://wa.me/${WHATSAPP_IND_RAW}`} target="_blank" rel="noreferrer" className="text-[#111111] font-mono font-bold hover:underline">{WHATSAPP_IND_DISPLAY}</a>
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-[#111111] shrink-0" />
-                <span>concierge@velmira.com</span>
+                <a href={`mailto:${VELMIRA_EMAIL}`} className="text-[#111111] hover:underline font-medium">
+                  {VELMIRA_EMAIL}
+                </a>
               </div>
             </div>
           </div>

@@ -149,7 +149,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <button
               onClick={handleWhatsAppOrder}
               className="p-1.5 border border-neutral-200 text-neutral-700 hover:text-black hover:border-black transition shrink-0"
-              title="Inquire on WhatsApp (+971 55 678 7854)"
+              title="Inquire on WhatsApp Concierge"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
             </button>
