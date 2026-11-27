@@ -211,6 +211,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteProduct = async (id: string) => {
+    setProducts(prev => prev.filter(p => p.id !== id));
     const res = await apiService.deleteProduct(id);
     await refreshProducts();
     return res;

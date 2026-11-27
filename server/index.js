@@ -25,9 +25,31 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-const DATA_DIR = path.join(__dirname, 'data');
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const SOURCE_DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = isServerless ? path.join('/tmp', 'velmira_data') : SOURCE_DATA_DIR;
+
 if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  } catch (e) {
+    console.error('Error creating DATA_DIR:', e);
+  }
+}
+
+// In serverless environments, copy initial data files to writable /tmp
+if (isServerless) {
+  ['products.json', 'orders.json', 'coupons.json', 'users.json'].forEach(fileName => {
+    const src = path.join(SOURCE_DATA_DIR, fileName);
+    const dest = path.join(DATA_DIR, fileName);
+    if (!fs.existsSync(dest) && fs.existsSync(src)) {
+      try {
+        fs.copyFileSync(src, dest);
+      } catch (e) {
+        console.error(`Failed to copy ${fileName} to /tmp:`, e);
+      }
+    }
+  });
 }
 
 const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
@@ -110,10 +132,6 @@ app.put('/api/products/:id', (req, res) => {
 // DELETE /api/products/:id (Admin delete)
 app.delete('/api/products/:id', (req, res) => {
   let products = readJson(PRODUCTS_FILE, []);
-  const exists = products.some(p => p.id === req.params.id);
-  if (!exists) {
-    return res.status(404).json({ success: false, message: 'Product not found' });
-  }
   products = products.filter(p => p.id !== req.params.id);
   writeJson(PRODUCTS_FILE, products);
   res.json({ success: true, message: 'Product deleted successfully' });

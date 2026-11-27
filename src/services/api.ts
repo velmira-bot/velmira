@@ -128,16 +128,23 @@ export const apiService = {
   },
 
   async deleteProduct(id: string): Promise<boolean> {
+    // 1. Always purge from local storage cache immediately
+    try {
+      let current = getLocal<Product[]>(LS_KEYS.PRODUCTS, INITIAL_PRODUCTS);
+      current = current.filter(p => p.id !== id);
+      setLocal(LS_KEYS.PRODUCTS, current);
+    } catch (e) {
+      console.warn('Failed to update local products cache:', e);
+    }
+
+    // 2. Call backend DELETE endpoint
     try {
       const res = await fetch(`${API_BASE}/products/${id}`, { method: 'DELETE' });
       if (res.ok) return true;
-    } catch {
-      // fallback
+    } catch (err) {
+      console.warn('Backend DELETE /api/products/:id failed, fallback to local storage:', err);
     }
 
-    let current = getLocal<Product[]>(LS_KEYS.PRODUCTS, INITIAL_PRODUCTS);
-    current = current.filter(p => p.id !== id);
-    setLocal(LS_KEYS.PRODUCTS, current);
     return true;
   },
 

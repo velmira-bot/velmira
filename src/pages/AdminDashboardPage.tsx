@@ -43,6 +43,22 @@ export const AdminDashboardPage: React.FC = () => {
   // Product Add/Edit Modal
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
+
+  const handleDeleteProduct = async (prod: Product) => {
+    const confirmed = window.confirm(`Are you sure you want to delete "${prod.name}" from the catalogue?`);
+    if (!confirmed) return;
+
+    try {
+      setDeletingProductId(prod.id);
+      await deleteProduct(prod.id);
+    } catch (err) {
+      console.error('Failed to delete timepiece:', err);
+      alert('Could not delete timepiece. Please try again.');
+    } finally {
+      setDeletingProductId(null);
+    }
+  };
 
   // Form State for Product Add / Edit
   const [formName, setFormName] = useState('');
@@ -587,11 +603,20 @@ export const AdminDashboardPage: React.FC = () => {
                               <Edit2 className="w-3.5 h-3.5" />
                             </button>
                             <button
-                              onClick={() => deleteProduct(prod.id)}
-                              className="p-1.5 border border-neutral-200 text-[#777777] hover:text-black hover:border-black transition"
-                              title="Delete Watch"
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteProduct(prod);
+                              }}
+                              disabled={deletingProductId === prod.id}
+                              className="p-1.5 border border-neutral-200 text-red-600 hover:text-white hover:bg-red-600 hover:border-red-600 transition disabled:opacity-50"
+                              title={`Delete ${prod.name}`}
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              {deletingProductId === prod.id ? (
+                                <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin block" />
+                              ) : (
+                                <Trash2 className="w-3.5 h-3.5" />
+                              )}
                             </button>
                           </div>
                         </td>
