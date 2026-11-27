@@ -5,13 +5,10 @@ import {
   Heart,
   ShoppingBag,
   Zap,
-  Ruler,
   ShieldCheck,
   RotateCcw,
   Truck,
   ChevronRight,
-  Plus,
-  Minus,
   Check,
   Sparkles,
   MessageCircle
@@ -21,10 +18,9 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { PINCodeChecker } from '../components/PINCodeChecker';
-import { SizeGuideModal } from '../components/SizeGuideModal';
 import { ProductCard } from '../components/ProductCard';
 import { Review } from '../types';
-import { openDirectProductWhatsApp, OFFICIAL_WHATSAPP_NUMBER } from '../utils/whatsapp';
+import { openDirectProductWhatsApp } from '../utils/whatsapp';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,8 +35,7 @@ export const ProductDetailPage: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
-  const [quantity, setQuantity] = useState(1);
-  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const quantity = 1;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,7 +43,6 @@ export const ProductDetailPage: React.FC = () => {
       setActiveImageIndex(0);
       setSelectedSize(product.sizes[0] || '40mm');
       setSelectedColor(product.colors[0]?.name || 'Standard');
-      setQuantity(1);
     }
   }, [id, product]);
 
@@ -219,99 +213,6 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Colors / Available Dials */}
-                {product.colors && product.colors.length > 0 && (
-                  <div className="mt-5">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-[#111111] uppercase tracking-wider">
-                        Available Dials / Finishes: <span className="text-[#71717A] font-semibold">{selectedColor}</span>
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      {product.colors.map(col => (
-                        <button
-                          key={col.name}
-                          type="button"
-                          onClick={() => setSelectedColor(col.name)}
-                          className={`flex items-center space-x-1.5 px-3 py-1.5 border text-xs font-medium transition ${
-                            selectedColor === col.name
-                              ? 'border-[#111111] bg-[#111111] text-white font-semibold'
-                              : 'border-neutral-200 text-[#111111] hover:border-black bg-white'
-                          }`}
-                        >
-                          <span
-                            className="w-3 h-3 rounded-full border border-neutral-300 shrink-0"
-                            style={{ backgroundColor: col.hex }}
-                          />
-                          <span>{col.name}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Case / Dial Size */}
-                <div className="mt-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-[#111111] uppercase tracking-wider">
-                      Case Diameter:
-                    </span>
-                    <button
-                      onClick={() => setIsSizeGuideOpen(true)}
-                      className="text-xs text-[#71717A] hover:text-black font-semibold flex items-center space-x-1 transition"
-                    >
-                      <Ruler className="w-3.5 h-3.5" />
-                      <span>Dimensions Guide</span>
-                    </button>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {product.sizes.map(size => (
-                      <button
-                        key={size}
-                        type="button"
-                        onClick={() => setSelectedSize(size)}
-                        className={`min-w-14 py-2 px-3 text-xs font-bold border transition ${
-                          selectedSize === size
-                            ? 'bg-[#111111] text-white border-[#111111]'
-                            : 'bg-white border-neutral-200 text-[#111111] hover:border-black'
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Availability & Quantity */}
-                <div className="mt-5 flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs font-bold text-[#111111] uppercase tracking-wider">
-                      Qty:
-                    </span>
-                    <div className="flex items-center border border-neutral-200 px-2 py-1 bg-white">
-                      <button
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="p-1 text-[#71717A] hover:text-black"
-                      >
-                        <Minus className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="px-3 text-xs font-bold text-[#111111] font-mono">{quantity}</span>
-                      <button
-                        onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                        className="p-1 text-[#71717A] hover:text-black"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-xs font-semibold text-emerald-700 flex items-center">
-                      <Check className="w-3.5 h-3.5 mr-1" /> {product.availability || 'In Stock (Ships in 24 Hours)'}
-                    </span>
-                  </div>
-                </div>
-
                 {/* THE 4 REQUIRED BUTTONS */}
                 <div className="mt-6 space-y-2.5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -445,12 +346,6 @@ export const ProductDetailPage: React.FC = () => {
           </div>
         )}
       </div>
-
-      <SizeGuideModal
-        isOpen={isSizeGuideOpen}
-        onClose={() => setIsSizeGuideOpen(false)}
-        category={product.category}
-      />
     </div>
   );
 };
