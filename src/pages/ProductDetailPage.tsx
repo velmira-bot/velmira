@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   Star,
   Heart,
-  ShoppingBag,
   Zap,
   ShieldCheck,
   RotateCcw,
@@ -65,10 +64,6 @@ export const ProductDetailPage: React.FC = () => {
   const relatedProducts = products
     .filter(p => (p.category === product.category || p.subcategory === product.subcategory) && p.id !== product.id)
     .slice(0, 4);
-
-  const handleAddToCart = () => {
-    addToCart(product, selectedSize, selectedColor, quantity);
-  };
 
   const handleBuyNow = () => {
     addToCart(product, selectedSize, selectedColor, quantity);
@@ -213,47 +208,25 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* THE 4 REQUIRED BUTTONS */}
-                <div className="mt-6 space-y-2.5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {/* 1. Add to Cart */}
-                    <button
-                      onClick={handleAddToCart}
-                      className="py-3.5 px-6 bg-white border border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white font-bold text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2 shadow-xs"
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                      <span>Add to Cart</span>
-                    </button>
+                {/* Action Buttons: Buy Now & WhatsApp Concierge */}
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Buy Now */}
+                  <button
+                    onClick={handleBuyNow}
+                    className="py-3.5 px-6 bg-[#111111] text-white hover:bg-black font-bold text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2 shadow-xs"
+                  >
+                    <Zap className="w-4 h-4 fill-white" />
+                    <span>Buy Now</span>
+                  </button>
 
-                    {/* 2. Buy Now */}
-                    <button
-                      onClick={handleBuyNow}
-                      className="py-3.5 px-6 bg-[#111111] text-white hover:bg-black font-bold text-xs uppercase tracking-widest transition flex items-center justify-center space-x-2 shadow-xs"
-                    >
-                      <Zap className="w-4 h-4 fill-white" />
-                      <span>Buy Now</span>
-                    </button>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {/* 3. Add to Wishlist */}
-                    <button
-                      onClick={() => toggleWishlist(product)}
-                      className="py-3 px-6 bg-white border border-neutral-300 text-[#111111] hover:border-black font-semibold text-xs uppercase tracking-wider transition flex items-center justify-center space-x-2"
-                    >
-                      <Heart className={`w-4 h-4 ${inWish ? 'fill-black text-black' : ''}`} />
-                      <span>{inWish ? 'In Wishlist' : 'Add to Wishlist'}</span>
-                    </button>
-
-                    {/* 4. WhatsApp Enquiry */}
-                    <button
-                      onClick={handleWhatsAppOrder}
-                      className="py-3 px-6 bg-[#F8F9FA] border border-neutral-300 text-[#111111] hover:bg-neutral-100 transition font-semibold text-xs uppercase tracking-wider flex items-center justify-center space-x-2"
-                    >
-                      <MessageCircle className="w-4 h-4 text-emerald-600" />
-                      <span>WhatsApp Enquiry</span>
-                    </button>
-                  </div>
+                  {/* WhatsApp Enquiry */}
+                  <button
+                    onClick={handleWhatsAppOrder}
+                    className="py-3.5 px-6 bg-[#F8F9FA] border border-neutral-300 text-[#111111] hover:bg-neutral-100 transition font-bold text-xs uppercase tracking-widest flex items-center justify-center space-x-2 shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-600" />
+                    <span>WhatsApp Enquiry</span>
+                  </button>
                 </div>
 
                 {/* Multi-Region Delivery Checker */}
